@@ -8,6 +8,7 @@ from typing import Optional, Dict, Any, List
 import re
 from fastapi import (
     FastAPI,
+    Request,
     Depends,
     HTTPException,
     WebSocket,
@@ -101,6 +102,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def add_no_cache_headers(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path.startswith("/controller") or request.url.path.startswith("/audience"):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
 
 # ------------------------------------------------------------
 # AUTHENTICATION ENDPOINTS

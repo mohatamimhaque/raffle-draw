@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupActionListeners();
   setupCategorySelector();
   setupSoundButton();
+  setupSettingsHandlers();
 
   if (authToken) {
     verifySession();
@@ -1415,3 +1416,23 @@ function setupSettingsHandlers() {
   }
 }
 
+// Global direct handlers so inline onclick attributes always work reliably
+window.openSettingsModal = function() {
+  const modal = document.getElementById('settingsModal');
+  if (modal) modal.style.display = 'flex';
+  if (typeof setupSettingsHandlers === 'function') {
+    setupSettingsHandlers();
+  }
+};
+
+window.closeSettingsModal = function() {
+  const modal = document.getElementById('settingsModal');
+  if (modal) modal.style.display = 'none';
+};
+
+// Immediate or DOM ready execution
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupSettingsHandlers);
+} else {
+  setupSettingsHandlers();
+}
