@@ -1227,7 +1227,65 @@ function renderDynamicCategories(categoryCounts) {
 // DYNAMIC SETTINGS & EXCEL DATA MANAGER
 // ------------------------------------------------------------
 
+const RELOAD_BTN_DEFAULT_HTML = `<span class="material-symbols-outlined" style="font-size:16px;">refresh</span> <span>Reload data.xlsx from Disk</span>`;
+let settingsHandlersInitialized = false;
+
+async function fetchSettingsData() {
+  try {
+    const res = await fetch(`${getApiBaseUrl()}/api/controller/settings`, {
+      headers: { 'Authorization': `Bearer ${authToken}` }
+    });
+    if (!res.ok) {
+      console.warn(`Settings fetch status: ${res.status}`);
+      return;
+    }
+    const data = await res.json();
+    if (!data.success) return;
+
+    const s = data.settings || {};
+    const f = data.file_info || {};
+
+    // Fill Form Inputs
+    const elOrg = document.getElementById('settingOrgName');
+    const elEvent = document.getElementById('settingEventName');
+    const elSegment = document.getElementById('settingSegmentName');
+    const elWinners = document.getElementById('settingTotalWinners');
+    const elCountdown = document.getElementById('settingCountdownSec');
+    const elShuffle = document.getElementById('settingShufflePasses');
+    const elRoll = document.getElementById('settingRollDurationMs');
+
+    if (elOrg) elOrg.value = s.organization_name || '';
+    if (elEvent) elEvent.value = s.event_name || '';
+    if (elSegment) elSegment.value = s.segment_name || '';
+    if (elWinners) elWinners.value = s.total_winners || 10;
+    if (elCountdown) elCountdown.value = s.draw_countdown_seconds || 3;
+    if (elShuffle) elShuffle.value = s.shuffle_passes || 100;
+    if (elRoll) elRoll.value = s.name_roll_duration_ms || 1500;
+
+    // Fill File Info
+    const elFileBadge = document.getElementById('settingsFileBadge');
+    const elTotal = document.getElementById('settingsTotalRows');
+    const elEligible = document.getElementById('settingsEligibleRows');
+    const elModified = document.getElementById('settingsFileModified');
+    const elCols = document.getElementById('settingsColumnsList');
+
+    if (elFileBadge) elFileBadge.textContent = f.filename || 'data.xlsx';
+    if (elTotal) elTotal.textContent = f.total_rows ?? 0;
+    if (elEligible) elEligible.textContent = f.eligible_rows ?? 0;
+    if (elModified) elModified.textContent = f.modified_at || '—';
+
+    if (elCols && Array.isArray(f.columns)) {
+      elCols.innerHTML = f.columns.map(c => `<span class="lock-badge" style="color:#67e8f9; border-color:rgba(34,211,238,0.3);">${escapeHtml(c)}</span>`).join('');
+    }
+  } catch (err) {
+    console.error('Failed to load settings:', err);
+  }
+}
+
 function setupSettingsHandlers() {
+  if (settingsHandlersInitialized) return;
+  settingsHandlersInitialized = true;
+
   const ctrlBtnSettings = document.getElementById('ctrlBtnSettings');
   const settingsModal = document.getElementById('settingsModal');
   const btnCloseSettingsModal = document.getElementById('btnCloseSettingsModal');
@@ -1236,105 +1294,69 @@ function setupSettingsHandlers() {
   const inputUploadExcel = document.getElementById('inputUploadExcel');
   const settingsForm = document.getElementById('settingsForm');
 
-  const openSettingsModal = async () => {
-    if (!settingsModal) return;
-    settingsModal.style.display = 'flex';
-    playBeep(650, 0.15);
-    await fetchSettingsData();
-  };
-
-  const closeSettingsModal = () => {
-    if (settingsModal) settingsModal.style.display = 'none';
-  };
-
-  window.openSettingsModal = openSettingsModal;
-  window.closeSettingsModal = closeSettingsModal;
-
   if (ctrlBtnSettings) {
-    ctrlBtnSettings.onclick = openSettingsModal;
-    ctrlBtnSettings.addEventListener('click', openSettingsModal);
+    ctrlBtnSettings.onclick = (e) => {
+      e.preventDefault();
+      window.openSettingsModal();
+    };
   }
-  if (btnCloseSettingsModal) btnCloseSettingsModal.addEventListener('click', closeSettingsModal);
-  if (btnCancelSettings) btnCancelSettings.addEventListener('click', closeSettingsModal);
+  if (btnCloseSettingsModal) {
+    btnCloseSettingsModal.onclick = (e) => {
+      e.preventDefault();
+      window.closeSettingsModal();
+    };
+  }
+  if (btnCancelSettings) {
+    btnCancelSettings.onclick = (e) => {
+      e.preventDefault();
+      window.closeSettingsModal();
+    };
+  }
   if (settingsModal) {
     settingsModal.addEventListener('click', (e) => {
-      if (e.target === settingsModal) closeSettingsModal();
+      if (e.target === settingsModal) window.closeSettingsModal();
     });
-  }
-
-  async function fetchSettingsData() {
-    try {
-      const res = await fetch(`${getApiBaseUrl()}/api/controller/settings`, {
-        headers: { 'Authorization': `Bearer ${authToken}` }
-      });
-      if (!res.ok) return;
-      const data = await res.json();
-      if (!data.success) return;
-
-      const s = data.settings || {};
-      const f = data.file_info || {};
-
-      // Fill Form Inputs
-      const elOrg = document.getElementById('settingOrgName');
-      const elEvent = document.getElementById('settingEventName');
-      const elSegment = document.getElementById('settingSegmentName');
-      const elWinners = document.getElementById('settingTotalWinners');
-      const elCountdown = document.getElementById('settingCountdownSec');
-      const elShuffle = document.getElementById('settingShufflePasses');
-      const elRoll = document.getElementById('settingRollDurationMs');
-
-      if (elOrg) elOrg.value = s.organization_name || '';
-      if (elEvent) elEvent.value = s.event_name || '';
-      if (elSegment) elSegment.value = s.segment_name || '';
-      if (elWinners) elWinners.value = s.total_winners || 10;
-      if (elCountdown) elCountdown.value = s.draw_countdown_seconds || 3;
-      if (elShuffle) elShuffle.value = s.shuffle_passes || 100;
-      if (elRoll) elRoll.value = s.name_roll_duration_ms || 1500;
-
-      // Fill File Info
-      const elFileBadge = document.getElementById('settingsFileBadge');
-      const elTotal = document.getElementById('settingsTotalRows');
-      const elEligible = document.getElementById('settingsEligibleRows');
-      const elModified = document.getElementById('settingsFileModified');
-      const elCols = document.getElementById('settingsColumnsList');
-
-      if (elFileBadge) elFileBadge.textContent = f.filename || 'data.xlsx';
-      if (elTotal) elTotal.textContent = f.total_rows || 0;
-      if (elEligible) elEligible.textContent = f.eligible_rows || 0;
-      if (elModified) elModified.textContent = f.modified_at || '—';
-
-      if (elCols && Array.isArray(f.columns)) {
-        elCols.innerHTML = f.columns.map(c => `<span class="lock-badge" style="color:#67e8f9; border-color:rgba(34,211,238,0.3);">${escapeHtml(c)}</span>`).join('');
-      }
-    } catch (err) {
-      console.error('Failed to load settings:', err);
-    }
   }
 
   // Reload data.xlsx directly from disk
   if (btnReloadExcelData) {
-    btnReloadExcelData.addEventListener('click', async () => {
+    btnReloadExcelData.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (btnReloadExcelData.disabled) return;
       btnReloadExcelData.disabled = true;
-      const origText = btnReloadExcelData.innerHTML;
       btnReloadExcelData.innerHTML = `<span class="material-symbols-outlined" style="font-size:16px;">hourglass_top</span> <span>Reloading...</span>`;
 
       try {
         const res = await fetch(`${getApiBaseUrl()}/api/controller/reload-data`, {
           method: 'POST',
-          headers: { 'Authorization': `Bearer ${authToken}` }
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/json'
+          }
         });
         const data = await res.json();
-        if (!res.ok || !data.success) throw new Error(data.error || 'Failed to reload');
+        if (!res.ok || !data.success) {
+          throw new Error(data.detail || data.error || 'Failed to reload data');
+        }
 
-        showToast(data.message, 'success');
-        addAuditLog(`data.xlsx reloaded: ${data.data.total_participants} participants (${data.data.eligible} eligible).`, 'info');
-        playBeep(880, 0.2);
+        showToast(data.message || 'data.xlsx reloaded successfully!', 'success');
+        addAuditLog(`data.xlsx reloaded: ${data.data?.total_participants ?? 0} participants (${data.data?.eligible ?? 0} eligible).`, 'info');
+        try { playBeep(880, 0.2); } catch (_) {}
+
+        // Live update modal badges and inputs
         await fetchSettingsData();
+
+        // Live update main controller console state and categories
+        if (data.data?.state) {
+          applyConsoleState(data.data.state);
+        } else {
+          fetchInitialConsoleData();
+        }
       } catch (err) {
         showToast(err.message, 'error');
       } finally {
         btnReloadExcelData.disabled = false;
-        btnReloadExcelData.innerHTML = origText;
+        btnReloadExcelData.innerHTML = RELOAD_BTN_DEFAULT_HTML;
       }
     });
   }
@@ -1358,12 +1380,20 @@ function setupSettingsHandlers() {
           body: formData
         });
         const data = await res.json();
-        if (!res.ok || !data.success) throw new Error(data.error || 'Upload failed');
+        if (!res.ok || !data.success) {
+          throw new Error(data.detail || data.error || 'Upload failed');
+        }
 
-        showToast(data.message, 'success');
-        addAuditLog(`Uploaded ${file.name}: ${data.data.total_participants} participants loaded.`, 'success');
-        playBeep(880, 0.25);
+        showToast(data.message || 'File uploaded successfully!', 'success');
+        addAuditLog(`Uploaded ${file.name}: ${data.data?.total_participants ?? 0} participants loaded.`, 'success');
+        try { playBeep(880, 0.25); } catch (_) {}
+
         await fetchSettingsData();
+        if (data.data?.state) {
+          applyConsoleState(data.data.state);
+        } else {
+          fetchInitialConsoleData();
+        }
         if (uploadStatus) uploadStatus.textContent = `✓ Uploaded ${file.name}`;
       } catch (err) {
         showToast(err.message, 'error');
@@ -1383,12 +1413,12 @@ function setupSettingsHandlers() {
 
       const payload = {
         organization_name: (document.getElementById('settingOrgName')?.value || '').trim(),
-        event_name: document.getElementById('settingEventName').value.trim(),
-        segment_name: document.getElementById('settingSegmentName').value.trim(),
-        total_winners: parseInt(document.getElementById('settingTotalWinners').value, 10),
-        draw_countdown_seconds: parseInt(document.getElementById('settingCountdownSec').value, 10),
-        shuffle_passes: parseInt(document.getElementById('settingShufflePasses').value, 10),
-        name_roll_duration_ms: parseInt(document.getElementById('settingRollDurationMs').value, 10)
+        event_name: (document.getElementById('settingEventName')?.value || '').trim(),
+        segment_name: (document.getElementById('settingSegmentName')?.value || '').trim(),
+        total_winners: parseInt(document.getElementById('settingTotalWinners')?.value || '10', 10),
+        draw_countdown_seconds: parseInt(document.getElementById('settingCountdownSec')?.value || '3', 10),
+        shuffle_passes: parseInt(document.getElementById('settingShufflePasses')?.value || '100', 10),
+        name_roll_duration_ms: parseInt(document.getElementById('settingRollDurationMs')?.value || '1500', 10)
       };
 
       try {
@@ -1401,12 +1431,18 @@ function setupSettingsHandlers() {
           body: JSON.stringify(payload)
         });
         const data = await res.json();
-        if (!res.ok || !data.success) throw new Error(data.error || 'Failed to update settings');
+        if (!res.ok || !data.success) {
+          throw new Error(data.detail || data.error || 'Failed to update settings');
+        }
 
         showToast('Settings saved & applied live to all stage displays!', 'success');
         addAuditLog(`Event settings updated: ${payload.event_name} (${payload.total_winners} winners target).`, 'info');
-        playBeep(988, 0.2);
-        closeSettingsModal();
+        try { playBeep(988, 0.2); } catch (_) {}
+
+        if (data.data) {
+          applyConsoleState(data.data);
+        }
+        window.closeSettingsModal();
       } catch (err) {
         showToast(err.message, 'error');
       } finally {
@@ -1417,12 +1453,12 @@ function setupSettingsHandlers() {
 }
 
 // Global direct handlers so inline onclick attributes always work reliably
-window.openSettingsModal = function() {
+window.openSettingsModal = async function() {
+  setupSettingsHandlers();
   const modal = document.getElementById('settingsModal');
   if (modal) modal.style.display = 'flex';
-  if (typeof setupSettingsHandlers === 'function') {
-    setupSettingsHandlers();
-  }
+  try { playBeep(650, 0.15); } catch (_) {}
+  await fetchSettingsData();
 };
 
 window.closeSettingsModal = function() {
