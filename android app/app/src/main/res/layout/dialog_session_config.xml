@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_glass_card"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_lg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="0.08"
+        android:text="Supabase Connection"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xxs"
+        android:text="Enter your Supabase project credentials:"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp" />
+
+    <!-- Project URL -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:text="Project URL"
+        android:textColor="@color/accent_neon_cyan_bright"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etUrlInput"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/min_touch_target"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_status_chip"
+        android:fontFamily="monospace"
+        android:hint="https://your-ref.supabase.co"
+        android:importantForAutofill="no"
+        android:inputType="textUri"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_muted"
+        android:textSize="13sp" />
+
+    <!-- Anon / Public Key -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:text="Anon / Public API Key"
+        android:textColor="@color/accent_neon_cyan_bright"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etKeyInput"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/min_touch_target"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_status_chip"
+        android:fontFamily="monospace"
+        android:hint="eyJhbGciOiJIUzI1NiIs..."
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_muted"
+        android:textSize="12sp" />
+
+    <!-- Session ID -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:text="Session / Channel ID"
+        android:textColor="@color/accent_neon_cyan_bright"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etSessionInput"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/min_touch_target"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_status_chip"
+        android:fontFamily="monospace"
+        android:hint="raffle_remote"
+        android:importantForAutofill="no"
+        android:inputType="textCapCharacters"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_muted"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/btnScanQrDialog"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:backgroundTint="@color/accent_neon_cyan"
+        android:text="@string/action_scan_qr"
+        android:textColor="@color/bg_space"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnClearCredentialsDialog"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:text="Clear Saved Credentials"
+        android:textColor="@color/status_red" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancelDialog"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_btn_cancel"
+            android:textColor="@color/text_muted" />
+
+        <Button
+            android:id="@+id/btnSaveDialog"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:text="@string/dialog_btn_connect"
+            android:textColor="@color/accent_neon_cyan_bright" />
+    </LinearLayout>
+
+</LinearLayout>

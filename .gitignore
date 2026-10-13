@@ -1,0 +1,129 @@
+# =================================================================
+# OFFICIAL RAFFLE DRAW SYSTEM — GITIGNORE
+# =================================================================
+
+# --- Markdown Documentation ---
+# Ignore all markdown files in subdirectories, keep only root README.md
+*.md
+!/README.md
+raffal_draw/ANDROID_QR_SUPABASE_DEVELOPER_GUIDE.md
+raffal_draw/ANDROID_REMOTE_CONTROLLER.md
+raffal_draw/README.md
+android app/README.md
+
+# --- Python & Virtual Environments ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Environment & Sensitive Credentials ---
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# --- Active Participant Data & Runtime Records ---
+# Ignore active data.xlsx and all JSON files in the data folder
+**/data/data.xlsx
+data.xlsx
+**/data/*.json
+raffal_draw/data/*.json
+
+# Keep reference example data files
+!**/data/data.example.xlsx
+!data.example.xlsx
+
+# --- Logs, Runtime Backups & Generated Artifacts ---
+*.log
+*.bak
+*.tmp
+*.temp
+raffal_draw/data/*.bak
+raffal_draw/data/*.tmp
+raffal_draw/data/*.pdf
+raffal_draw/data_real_backup/
+data_real_backup/
+
+# --- Branding & Graphics Specific Exclusions ---
+fest logo.png
+**/fest logo.png
+**/fest_logo.png
+ic_cse_fest_logo.xml
+**/ic_cse_fest_logo.xml
+
+# --- IDEs & Editors ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# --- Operating System ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# --- Jupyter Notebooks & Data Scratchpads ---
+.ipynb_checkpoints/
+*.ipynb
+
+# --- Graphics & Adobe Illustrator Source Files ---
+*.ai
+*.psd
+*.jsx
+
+# --- Zip & Compressed Archives ---
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# --- Unrelated Staging Spreadsheets & Temporary Data ---
+fest_raffle_draw.xlsx
+fest_raffle_draw_cleaned.xlsx
+final_year.xlsx
+first_year.xlsx
+final_year.json
+participants.xlsx
+
+# --- Android Build & Gradle Artifacts ---
+android app/.gradle/
+android app/build/
+android app/app/build/
+android app/local.properties
+android app/.idea/
+android app/captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+# --- Android Keystores & Signing Keys ---
+*.jks
+*.keystore
+!android app/app-release.apk
+!app-release.apk

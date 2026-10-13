@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Emitted rays of light at top -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M11,1h2v3h-2zM4.93,3.52l1.41,-1.41 2.12,2.12 -1.41,1.41zM19.07,3.52l-2.12,2.12 -1.41,-1.41 2.12,-2.12z" />
+    <!-- Flashlight head, tapered collar, handle -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6,7h12v2l-3,3v8c0,1.1 -0.9,2 -2,2h-2c-1.1,0 -2,-0.9 -2,-2v-8l-3,-3V7z" />
+    <!-- Center power switch -->
+    <path
+        android:fillColor="#050811"
+        android:pathData="M11,14h2v2h-2z" />
+</vector>

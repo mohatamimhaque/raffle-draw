@@ -1,0 +1,878 @@
+/* DUET CSE FEST 2026 — Audience Display Stylesheet
+   Directly matching D:\duet-cse-fest-2026-raffle-draw\src\index.css & AudienceDisplay.tsx */
+
+:root {
+  /* Dark Mode (Aligned with DUET CSE Fest 2026 Theme: Deep Cyber Navy / High-Tech Grid / Cyan & Gold accents) */
+  --bg-space: #070c18;
+  --bg-space-gradient: radial-gradient(circle at 50% 15%, #0f1c38 0%, #080e1c 50%, #040710 100%);
+  --surface-glass: rgba(10, 18, 36, 0.72);
+  --surface-glass-border: rgba(34, 211, 238, 0.25);
+  --surface-glass-hover: rgba(15, 27, 54, 0.85);
+  --surface-card: rgba(8, 14, 28, 0.85);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  --accent-neon-pink: #f43f5e;
+  --accent-neon-purple: #818cf8;
+  --accent-neon-cyan: #06b6d4;
+  --accent-gold: #fbbf24;
+  
+  --glow-primary: rgba(6, 182, 212, 0.35);
+  --glow-cyan: rgba(34, 211, 238, 0.35);
+  --glow-gold: rgba(251, 191, 36, 0.4);
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-space);
+  background-image: var(--bg-space-gradient);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Material Symbols Icon Utility */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+/* Glassmorphism Classes directly matching D:\duet-cse-fest-2026-raffle-draw */
+.glass-panel {
+  background: var(--surface-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--surface-glass-border);
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.35);
+}
+
+.glass-capsule {
+  background: radial-gradient(circle at 50% 30%, rgba(139, 92, 246, 0.15), rgba(15, 10, 38, 0.85));
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1.5px solid rgba(167, 139, 250, 0.35);
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-card {
+  background: rgba(19, 13, 43, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+/* Fullscreen dedicated Confetti Canvas */
+#audience-confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 1. Volumetric Background Atmosphere & Geometric Lattice Mesh */
+.volumetric-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+
+.geometric-lattice-mesh {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+}
+
+.ambient-halo-cyan {
+  position: absolute;
+  width: 80vw;
+  height: 80vw;
+  max-width: 1200px;
+  max-h: 1200px;
+  border-radius: 50%;
+  background: rgba(8, 145, 178, 0.10);
+  filter: blur(150px);
+}
+
+.ambient-halo-purple {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 900px;
+  max-h: 900px;
+  border-radius: 50%;
+  background: rgba(147, 51, 234, 0.15);
+  filter: blur(140px);
+}
+
+.ambient-halo-amber {
+  position: absolute;
+  width: 70vw;
+  height: 70vw;
+  max-width: 1000px;
+  max-h: 1000px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.20);
+  filter: blur(130px);
+  animation: pulseSubtle 4s ease-in-out infinite;
+}
+
+/* Floating Status & Controls in Header */
+.top-header-bar {
+  position: fixed;
+  top: 16px;
+  left: 20px;
+  right: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.realtime-indicator-pill {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.realtime-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 10px #34d399;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.header-btn-group {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-icon-btn {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #cbd5e1;
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.header-icon-btn:hover {
+  background: rgba(30, 41, 59, 0.95);
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* 2. Main Stage Centerpiece Container */
+.audience-stage-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.main-stage-centerpiece {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+/* DuetFestIntro Component Styles */
+.duet-fest-intro-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  padding: 8px 16px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInZoom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.duet-intro-cyber-frame {
+  position: relative;
+  width: 100%;
+  padding: 44px 32px;
+  border-radius: 40px;
+  overflow: hidden;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  background: linear-gradient(180deg, rgba(8, 14, 30, 0.92) 0%, rgba(6, 11, 23, 0.95) 50%, rgba(4, 7, 16, 0.98) 100%);
+  box-shadow: 0 0 80px rgba(6, 182, 212, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+}
+
+.duet-top-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: #67e8f9;
+  background: rgba(8, 47, 73, 0.45);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+  backdrop-filter: blur(12px);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.duet-brand-duet {
+  color: #22d3ee;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  font-size: clamp(28px, 4vw, 44px);
+  filter: drop-shadow(0 0 25px rgba(6, 182, 212, 0.9));
+  text-transform: uppercase;
+  padding-left: 0.35em;
+  margin: 6px 0;
+}
+
+.duet-brand-fest-emblem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 6px 0;
+}
+
+.golden-radial-aura {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 180px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.25);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.duet-brand-csefest {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  letter-spacing: -1px;
+  font-size: clamp(40px, 6.5vw, 76px);
+  color: #ffffff;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+  line-height: 1;
+}
+
+.duet-brand-2026 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  letter-spacing: -1px;
+  font-size: clamp(40px, 6.5vw, 76px);
+  color: #fbbf24;
+  filter: drop-shadow(0 0 35px rgba(251, 191, 36, 0.85));
+  line-height: 1;
+}
+
+.duet-dept-subtitle {
+  font-size: clamp(12px, 1.4vw, 16px);
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #cbd5e1;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-top: 10px;
+}
+
+.duet-divider-line {
+  width: 100%;
+  max-width: 550px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(51, 65, 85, 0.6), transparent);
+  margin: 14px 0;
+}
+
+.duet-status-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  font-size: clamp(12px, 1.4vw, 15px);
+  color: #a5f3fc;
+  text-transform: uppercase;
+}
+
+.duet-standby-subline {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Phase 2: Circular Glowing SVG Countdown Gauge */
+.countdown-capsule {
+  width: 100%;
+  min-height: 600px;
+  padding: 56px 48px;
+  border-radius: 44px;
+  text-align: center;
+  overflow: hidden;
+  border: 2px solid rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 80px rgba(6, 182, 212, 0.35);
+  animation: fadeInZoom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.countdown-header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #67e8f9;
+  background: rgba(6, 182, 212, 0.2);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  margin-bottom: 20px;
+}
+
+.svg-gauge-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 280px;
+  margin: 10px auto;
+}
+
+.shockwave-ripple {
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  border: 2px solid rgba(34, 211, 238, 0.6);
+  animation: pingRipple 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+@keyframes pingRipple {
+  75%, 100% { transform: scale(1.3); opacity: 0; }
+}
+
+.orbital-ring-1 {
+  animation: spinClockwise 45s linear infinite;
+}
+
+.orbital-ring-2 {
+  animation: spinCounter 60s linear infinite;
+}
+
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounter {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.exploding-countdown-number {
+  font-size: 110px;
+  font-weight: 900;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1;
+  background: linear-gradient(180deg, #ffffff 10%, #67e8f9 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 40px rgba(6, 182, 212, 0.95));
+  animation: countNumberFlash 0.9s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes countNumberFlash {
+  0% { transform: scale(0.85); opacity: 0.3; }
+  50% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.countdown-progress-bar-wrap {
+  width: 100%;
+  max-width: 320px;
+  height: 8px;
+  background: #1e293b;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin: 16px auto 10px;
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  padding: 1px;
+}
+
+.countdown-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #06b6d4, #8b5cf6, #ec4899);
+  border-radius: 9999px;
+  transition: width 1s linear;
+  box-shadow: 0 0 12px #06b6d4;
+}
+
+/* Unified Large Capsule Dimension for all Stage Phases (Matching #stageWinnerConfirmed) */
+#stageWinnerConfirmed,
+#stageCompleted,
+#stageIgnored,
+#stageReveal,
+#stageRolling {
+  width: 100%;
+  min-height: 600px;
+  padding: 60px 48px;
+  border-radius: 44px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Phase 3: Rolling Simulation */
+.rolling-capsule {
+  width: 100%;
+  min-height: 600px;
+  padding: 60px 48px;
+  border-radius: 44px;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Seamless rolling HUD with no bg, border, or shadow */
+.rolling-card-hud {
+  width: 100%;
+  max-width: 580px;
+  padding: 24px 16px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  margin: 0 auto;
+}
+
+.rolling-candidate-name {
+  font-size: clamp(40px, 5.5vw, 68px);
+  font-weight: 800;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.5px;
+  margin: 12px 0;
+  text-shadow: 0 0 30px rgba(34, 211, 238, 0.6);
+}
+
+/* Phase 4: Candidate Reveal */
+.candidate-reveal-capsule {
+  width: 100%;
+  min-height: 600px;
+  padding: 60px 48px;
+  border-radius: 44px;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInZoom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.candidate-name-display {
+  font-size: clamp(44px, 6.5vw, 82px);
+  font-weight: 900;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+  margin: 16px 0;
+}
+
+.candidate-roll-chip {
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+  color: #67e8f9;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#revealCategoryChip {
+  font-size: 15px !important;
+  padding: 8px 22px !important;
+}
+
+#confirmedCategoryBadge {
+  font-size: 17px !important;
+  padding: 8px 20px !important;
+}
+
+#confirmedRollText {
+  font-size: 19px !important;
+}
+
+/* Phase 5: Winner Confirmed (Golden 3D Trophy) */
+.winner-confirmed-capsule {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  padding: 60px 48px;
+  border-radius: 44px;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: revealBounce 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes revealBounce {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.03); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.trophy-emblem-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  width: 100px;
+  height: 100px;
+}
+
+.dashed-golden-orbital-ring {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px dashed rgba(251, 191, 36, 0.6);
+  animation: spinClockwise 16s linear infinite;
+}
+
+.center-metallic-gold-trophy {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d97706, #fbbf24, #f59e0b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(245, 158, 11, 0.9);
+}
+
+.luxury-verification-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fef3c7;
+  background: rgba(245, 158, 11, 0.25);
+  border: 1px solid rgba(251, 191, 36, 0.7);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.45);
+  margin-bottom: 12px;
+}
+
+.winner-gold-foil-name {
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 900;
+  font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde047 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 45px rgba(245, 158, 11, 0.7));
+  line-height: 1.1;
+  margin: 10px 0;
+}
+
+/* Category Badges */
+.category-badge-student {
+  background: rgba(6, 182, 212, 0.2);
+  color: #67e8f9;
+  border: 1px solid rgba(34, 211, 238, 0.4);
+}
+
+.category-badge-faculty {
+  background: rgba(147, 51, 234, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.category-badge-guest {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+/* Phase 6: Ignored / Absent (Matching stageWinnerConfirmed size) */
+.ignored-capsule {
+  width: 100%;
+  min-height: 600px;
+  padding: 60px 48px;
+  border-radius: 44px;
+  border: 1.5px solid rgba(244, 63, 94, 0.5);
+  box-shadow: 0 0 60px rgba(244, 63, 94, 0.35);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInZoom 0.3s ease;
+}
+
+/* Phase 7: Raffle Completed & 30s Winners Roster */
+.completed-capsule {
+  width: 100%;
+  min-height: 600px;
+  padding: 60px 48px;
+  border-radius: 44px;
+  border: 1.5px solid rgba(251, 191, 36, 0.45);
+  box-shadow: 0 0 80px rgba(251, 191, 36, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInZoom 0.4s ease;
+}
+
+.roster-winner-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+#ignoredCandidateName {
+  font-size: clamp(40px, 5.5vw, 68px) !important;
+}
+
+.roster-winner-card:hover {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(34, 211, 238, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.roster-rank-pill {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: 13px;
+  background: rgba(6, 182, 212, 0.2);
+  color: #67e8f9;
+  border: 1px solid rgba(34, 211, 238, 0.4);
+}
+
+.roster-rank-top3 {
+  background: linear-gradient(135deg, #d97706, #fbbf24);
+  color: #070c18;
+  border: none;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+}
+
+/* Bottom Footer with mohatamim credit badge */
+.audience-footer {
+  position: fixed;
+  bottom: 16px;
+  right: 20px;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.credit-badge {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  color: rgba(148, 163, 184, 0.9);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.credit-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 6px #22d3ee;
+}
+
+/* Bottom Winner History Bar */
+.bottom-history-drawer {
+  position: fixed;
+  bottom: 12px;
+  left: 20px;
+  right: 170px;
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  pointer-events: auto;
+  padding-bottom: 4px;
+}
+
+.bottom-history-drawer::-webkit-scrollbar {
+  height: 3px;
+}
+
+.bottom-history-drawer::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.3);
+  border-radius: 9999px;
+}
+
+.history-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  backdrop-filter: blur(10px);
+  font-size: 12px;
+}
+
+@keyframes fadeInZoom {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+

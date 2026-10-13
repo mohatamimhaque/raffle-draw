@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Space Palette -->
+    <color name="bg_space">#070C18</color>
+    <color name="bg_space_top">#0F1C38</color>
+    <color name="bg_space_mid">#080E1C</color>
+    <color name="bg_space_deep">#040710</color>
+
+    <!-- Glass Surfaces -->
+    <color name="surface_glass">#B80A1224</color>
+    <color name="surface_glass_border">#4022D3EE</color>
+    <color name="surface_glass_border_active">#8022D3EE</color>
+    <color name="surface_glass_border_disabled">#2094A3B8</color>
+    <color name="surface_glass_border_error">#60F43F5E</color>
+    <color name="surface_glass_hover">#D90F1B36</color>
+    <color name="surface_card">#D9080E1C</color>
+    <color name="surface_card_disabled">#AA080E1C</color>
+
+    <!-- Typography -->
+    <color name="text_primary">#F8FAFC</color>
+    <color name="text_secondary">#CBD5E1</color>
+    <color name="text_muted">#94A3B8</color>
+    <color name="text_tertiary">#64748B</color>
+
+    <!-- Accents -->
+    <color name="accent_neon_pink">#F43F5E</color>
+    <color name="accent_neon_purple">#818CF8</color>
+    <color name="accent_neon_cyan">#06B6D4</color>
+    <color name="accent_neon_cyan_bright">#22D3EE</color>
+    <color name="accent_gold">#FBBF24</color>
+    <color name="status_green">#10B981</color>
+    <color name="status_red">#F43F5E</color>
+    <color name="status_amber">#F59E0B</color>
+
+    <!-- Glows & States -->
+    <color name="glow_primary">#5906B6D4</color>
+    <color name="glow_cyan">#5922D3EE</color>
+    <color name="glow_gold">#66FBBF24</color>
+    <color name="glow_pink">#59F43F5E</color>
+
+    <!-- Common -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+</resources>

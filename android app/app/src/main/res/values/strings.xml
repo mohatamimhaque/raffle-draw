@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Raffle Remote</string>
+    <string name="event_name">Raffle Draw</string>
+    <string name="subtitle_remote">EVENT REMOTE CONTROLLER</string>
+    <string name="developer_name">mohatamim</string>
+
+    <string name="action_draw">DRAW</string>
+    <string name="action_draw_unavailable">DRAW UNAVAILABLE</string>
+    <string name="action_remote_unavailable">REMOTE UNAVAILABLE</string>
+    <string name="action_request_sent">REQUEST SENT</string>
+    <string name="action_requesting">REQUESTING...</string>
+    <string name="action_drawing">DRAWING</string>
+    <string name="action_completed">COMPLETED</string>
+    <string name="action_unavailable">DRAW UNAVAILABLE</string>
+    <string name="action_reconnect">RECONNECT</string>
+
+    <string name="desc_ready_to_draw">TAP TO TRIGGER DRAW</string>
+    <string name="desc_waiting_permission">AWAITING PC AUTHORIZATION</string>
+    <string name="desc_connection_lost">TAP TO RECONNECT</string>
+    <string name="desc_tap_to_reconnect">TAP TO RECONNECT</string>
+    <string name="desc_remote_disabled">REMOTE LOCKED ON PC</string>
+    <string name="desc_please_wait">ANIMATING ON STAGE...</string>
+
+    <string name="status_connected_caps">CONNECTED</string>
+    <string name="status_disconnected_caps">NOT CONNECTED</string>
+    <string name="status_connecting_caps">CONNECTING...</string>
+    <string name="status_waiting_caps">WAITING FOR PC</string>
+    <string name="desc_website_offline">WEBSITE OFFLINE</string>
+    <string name="status_no_credentials">NOT CONFIGURED</string>
+    <string name="desc_scan_website_qr">TAP TO SCAN QR CODE</string>
+    <string name="action_scan_qr">SCAN QR</string>
+    <string name="prompt_scan_qr">Scan Website Controller QR Code</string>
+    <string name="qr_scan_success">Connected to Website via QR Code!</string>
+    <string name="qr_scan_invalid">Invalid QR Code. Scan from website controller.</string>
+
+    <string name="status_connected">READY TO DRAW</string>
+    <string name="status_waiting">WAITING FOR PC</string>
+    <string name="status_drawing">DRAW IN PROGRESS</string>
+    <string name="status_connecting">CONNECTING...</string>
+    <string name="status_reconnecting">RECONNECTING...</string>
+    <string name="status_connection_lost">STANDBY • OFFLINE</string>
+    <string name="status_remote_disabled">REMOTE DISABLED</string>
+
+    <string name="session_prefix">SESSION :</string>
+    <string name="session_default">raffle_remote</string>
+    <string name="channel_info">Realtime Channel</string>
+    <string name="dialog_session_title">Remote Settings</string>
+    <string name="dialog_session_hint">Session ID (e.g. raffle_remote)</string>
+    <string name="dialog_pin_hint">PIN / Access Code (Optional)</string>
+    <string name="dialog_btn_connect">Save &amp; Connect</string>
+    <string name="dialog_btn_test">Test Draw Animation</string>
+    <string name="dialog_btn_cancel">Cancel</string>
+</resources>

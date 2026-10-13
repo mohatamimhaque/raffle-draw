@@ -1,0 +1,6 @@
+{
+  "name": "Raffle Remote",
+  "description": "Native Android remote controller for CSE FEST PC raffle draw system with Supabase Realtime Broadcast",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

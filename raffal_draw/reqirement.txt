@@ -1,0 +1,2 @@
+# Alias / Mirror of requirements.txt
+-r requirements.txt

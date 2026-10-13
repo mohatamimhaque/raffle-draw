@@ -1,0 +1,69 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Glowing Outer Badge / Capsule Hexagon -->
+    <path
+        android:fillColor="#0D1B2A"
+        android:strokeColor="#22D3EE"
+        android:strokeWidth="2.5"
+        android:pathData="M60,10 L102,32 L102,88 L60,110 L18,88 L18,32 Z" />
+
+    <!-- Inner Golden Frame -->
+    <path
+        android:fillColor="#152238"
+        android:strokeColor="#FBBF24"
+        android:strokeWidth="1.5"
+        android:pathData="M60,18 L94,36 L94,84 L60,102 L26,84 L26,36 Z" />
+
+    <!-- Golden Winner Trophy Emblem -->
+    <!-- Trophy Cup Base -->
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="M46,84 L74,84 L72,78 L48,78 Z" />
+
+    <!-- Trophy Stem -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M56,66 L64,66 L64,78 L56,78 Z" />
+
+    <!-- Trophy Cup Body -->
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="M42,38 L78,38 L76,58 C76,66 68,70 60,70 C52,70 44,66 44,58 Z" />
+
+    <!-- Trophy Left Handle -->
+    <path
+        android:strokeColor="#F59E0B"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M43,42 C35,42 34,54 44,56" />
+
+    <!-- Trophy Right Handle -->
+    <path
+        android:strokeColor="#F59E0B"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M77,42 C85,42 86,54 76,56" />
+
+    <!-- Lucky Star in Cup Center -->
+    <path
+        android:fillColor="#0F172A"
+        android:pathData="M60,45 L62,50 L67,50 L63,53 L64.5,58 L60,55 L55.5,58 L57,53 L53,50 L58,50 Z" />
+
+    <!-- Cyberpunk Sparkles / Stars -->
+    <path
+        android:fillColor="#22D3EE"
+        android:pathData="M34,28 L36,32 L40,32 L37,34 L38,38 L34,35 L30,38 L31,34 L28,32 L32,32 Z" />
+
+    <path
+        android:fillColor="#22D3EE"
+        android:pathData="M86,28 L88,32 L92,32 L89,34 L90,38 L86,35 L82,38 L83,34 L80,32 L84,32 Z" />
+
+    <!-- Bottom Lucky Dice / Ticket Accent -->
+    <path
+        android:fillColor="#38BDF8"
+        android:pathData="M52,90 L68,90 L68,96 L52,96 Z" />
+</vector>

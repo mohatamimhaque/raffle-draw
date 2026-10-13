@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050811">
+
+    <!-- ZXing DecoratedBarcodeView -->
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/zxing_barcode_scanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:zxing_use_texture_view="true" />
+
+    <!-- Pro Viewfinder Frame -->
+    <RelativeLayout
+        android:id="@+id/scannerFrameContainer"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_gravity="center">
+
+        <!-- Corner Top-Left -->
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_scanner_corner" />
+
+        <!-- Corner Top-Right -->
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:rotation="90"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_scanner_corner" />
+
+        <!-- Corner Bottom-Left -->
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:rotation="270"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_scanner_corner" />
+
+        <!-- Corner Bottom-Right -->
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:rotation="180"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_scanner_corner" />
+
+        <!-- Animated Laser Sweep Line -->
+        <View
+            android:id="@+id/laserLine"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_laser_line" />
+    </RelativeLayout>
+
+    <!-- Top Header Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="48dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="16dp">
+
+        <ImageButton
+            android:id="@+id/btnScannerBack"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_icon_button"
+            android:contentDescription="Back"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/text_primary" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:letterSpacing="0.15"
+            android:text="PAIR WITH WEBSITE"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnScannerTorch"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_icon_button"
+            android:contentDescription="Flashlight"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_flashlight_off"
+            app:tint="@color/text_secondary" />
+    </LinearLayout>
+</FrameLayout>
