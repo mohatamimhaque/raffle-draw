@@ -1236,19 +1236,30 @@ function setupSettingsHandlers() {
   const settingsForm = document.getElementById('settingsForm');
 
   const openSettingsModal = async () => {
-    if (settingsModal) {
-      settingsModal.style.display = 'flex';
-      await fetchSettingsData();
-    }
+    if (!settingsModal) return;
+    settingsModal.style.display = 'flex';
+    playBeep(650, 0.15);
+    await fetchSettingsData();
   };
 
   const closeSettingsModal = () => {
     if (settingsModal) settingsModal.style.display = 'none';
   };
 
-  if (ctrlBtnSettings) ctrlBtnSettings.addEventListener('click', openSettingsModal);
+  window.openSettingsModal = openSettingsModal;
+  window.closeSettingsModal = closeSettingsModal;
+
+  if (ctrlBtnSettings) {
+    ctrlBtnSettings.onclick = openSettingsModal;
+    ctrlBtnSettings.addEventListener('click', openSettingsModal);
+  }
   if (btnCloseSettingsModal) btnCloseSettingsModal.addEventListener('click', closeSettingsModal);
   if (btnCancelSettings) btnCancelSettings.addEventListener('click', closeSettingsModal);
+  if (settingsModal) {
+    settingsModal.addEventListener('click', (e) => {
+      if (e.target === settingsModal) closeSettingsModal();
+    });
+  }
 
   async function fetchSettingsData() {
     try {

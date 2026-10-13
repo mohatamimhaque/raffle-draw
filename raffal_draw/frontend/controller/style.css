@@ -940,17 +940,18 @@ button:disabled,
   border-left-color: #f43f5e;
 }
 
-/* Login Modal */
-.login-overlay {
+/* Login & Modal Overlays */
+.login-overlay,
+.login-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(4, 7, 16, 0.9);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(4, 7, 16, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 200;
   padding: 20px;
 }
 
